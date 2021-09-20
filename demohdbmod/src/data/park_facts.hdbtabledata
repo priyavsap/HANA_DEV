@@ -1,0 +1,20 @@
+{
+    "format_version": 1,
+    "imports": [
+        {
+            "target_table": "demoproject.demohdbmod.data::facts",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "demoproject.demohdbmod.data::park_facts.csv",
+                "has_header": true
+            },
+            "import_settings": {
+                "import_columns": [
+                    "ID",
+                    "YEAR",
+					"DECADE"
+                ]
+            }
+        }
+    ]
+}

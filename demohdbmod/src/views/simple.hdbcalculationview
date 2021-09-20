@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="demoproject.demohdbmod.views::simple" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="simple"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="demoproject.demohdbmod.views::dimension">
+    <resourceUri>demoproject.demohdbmod.views::dimension</resourceUri>
+  </DataSource>
+  <DataSource id="demoproject.demohdbmod.data::facts">
+    <resourceUri>demoproject.demohdbmod.data::facts</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Dimensions">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="FACILITY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="demoproject.demohdbmod.views::dimension"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Facts">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="YEAR"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="demoproject.demohdbmod.data::facts"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="FACILITY"/>
+      <viewAttribute id="AWARDS" aggregationType="sum"/>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute hidden="true" id="JOIN$ID$ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Dimensions">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FACILITY" source="FACILITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+    </input>
+    <input node="Facts">
+      <mapping xsi:type="Calculation:AttributeMapping" target="AWARDS" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+    </input>
+    <joinAttribute name="JOIN$ID$ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="FACILITY" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FACILITY"/>
+      <keyMapping columnObjectName="Join_1" columnName="FACILITY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="AWARDS" order="2" aggregationType="count" measureType="simple">
+      <descriptions defaultDescription="ID"/>
+      <measureMapping columnObjectName="Join_1" columnName="AWARDS"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Dimensions" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-34" y="368"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Facts" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="190" y="368"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="199"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Dimensions" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="133.67919921875"/>
+    </shape>
+    <shape modelObjectName="Facts" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="115.95458984375"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

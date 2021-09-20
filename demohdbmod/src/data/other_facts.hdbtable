@@ -1,0 +1,6 @@
+COLUMN TABLE "demoproject.demohdbmod.data::other_facts" 
+(
+   "ID" INTEGER, 
+   "YEAR" VARCHAR(4),
+   "NUMBER_OF_EVENTS" INTEGER
+)

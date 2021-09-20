@@ -1,0 +1,19 @@
+ID: demoproject
+_schema-version: '2.1'
+version: 0.0.1
+
+modules:
+ - name: demohdbmod
+   type: hdb
+   path: demohdbmod
+   requires:
+    - name: hdi_demohdbmod
+
+resources:
+ - name: hdi_demohdbmod
+   parameters:
+      config:
+         schema: park
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container

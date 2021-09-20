@@ -1,0 +1,6 @@
+COLUMN TABLE "demoproject.demohdbmod.data::facts" 
+(
+   "ID" INTEGER, 
+   "YEAR" VARCHAR(4),
+   "DECADE" VARCHAR(5)
+)

@@ -1,0 +1,5 @@
+COLUMN TABLE "demoproject.demohdbmod.data::dims" 
+(
+   "ID" INTEGER, 
+   "FACILITY" VARCHAR(50)
+)
